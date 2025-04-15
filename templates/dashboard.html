@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container mt-4">
+  <h2 class="mb-4">Degree Records</h2>
+  
+  <!-- Filter Form -->
+  <form method="GET" action="{{ url_for('dashboard') }}" class="row g-3 mb-4">
+    <div class="col-md-2">
+      <input name="entryno" class="form-control" placeholder="Entry No" value="{{ request.args.get('entryno', '') }}">
+    </div>
+    <!-- <div class="col-md-2">
+      <input name="name" class="form-control" placeholder="Name" value="{{ request.args.get('name', '') }}">
+    </div> -->
+    <div class="col-md-2">
+      <input name="spec_name" class="form-control" placeholder="Spec Name" value="{{ request.args.get('spec_name', '') }}">
+    </div>
+    <!-- <div class="col-md-2">
+      <input name="degree_name" class="form-control" placeholder="Degree Name" value="{{ request.args.get('degree_name', '') }}">
+    </div> -->
+    <div class="col-md-2">
+      <input name="completion_year" class="form-control" placeholder="Completion Year" value="{{ request.args.get('completion_year', '') }}">
+    </div>
+    <div class="col-md-2">
+      <button type="submit" class="btn btn-primary w-100">Filter</button>
+    </div>
+  </form>
+  
+  <!-- Generation Options -->
+  <form method="POST" action="{{ url_for('generate') }}">
+    <div class="mb-3">
+      <label class="form-label"><strong>Select Output Format:</strong></label>
+      <div>
+        <button type="submit" name="output_format" value="pdf" class="btn btn-success me-2">Generate PDF</button>
+        <button type="submit" name="output_format" value="docx" class="btn btn-info">Generate DOCX</button>
+      </div>
+    </div>
+    
+    <!-- Records Table -->
+    <table class="table table-bordered table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th><input type="checkbox" id="select-all"></th>
+          <th>Entry No</th>
+          <th>Name</th>
+          <!-- <th class="hindi">Name Hindi</th> -->
+          <th>Spec Name</th>
+          <!-- <th class="hindi">Spec Name Hindi</th> -->
+          <th>Degree Name</th>
+          <!-- <th class="hindi">Degree Name Hindi</th> -->
+          <th>Completion Year</th>
+          <th>Convo Day</th>
+          <!-- <th class="hindi">Convo Month Hindi</th> -->
+          <th>Convo Year</th>
+          <th>Degree GPA</th>
+          <!-- <th class="hindi">Given Day</th>
+          <th class="hindi">Given Month</th>
+          <th class="hindi">Given Year</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in records %}
+        <tr>
+          <td><input type="checkbox" name="entries" value="{{ r.entryno }}"></td>
+          <td>{{ r.entryno }}</td>
+          <td>{{ r.name }}</td>
+          <!-- <td class="hindi">{{ r.name_hindi }}</td> -->
+          <td>{{ r.spec_name }}</td>
+          <!-- <td class="hindi">{{ r.spec_name_hindi }}</td> -->
+          <td>{{ r.degree_name }}</td>
+          <!-- <td class="hindi">{{ r.degree_name_hindi }}</td> -->
+          <td>{{ r.completion_year }}</td>
+          <td>{{ r.convo_day }}</td>
+          <!-- <td class="hindi">{{ r.convo_month_hindi }}</td> -->
+          <td>{{ r.convo_year }}</td>
+          <td>{{ r.degree_gpa }}</td>
+          <!-- <td class="hindi">{{ r.given_day }}</td>
+          <td class="hindi">{{ r.given_month }}</td>
+          <td class="hindi">{{ r.given_year }}</td> -->
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </form>
+</div>
+
+<script>
+  // "Select All" functionality
+  document.getElementById('select-all').addEventListener('change', function(e) {
+    var checkboxes = document.querySelectorAll('input[name="entries"]');
+    checkboxes.forEach(function(checkbox) {
+      checkbox.checked = e.target.checked;
+    });
+  });
+</script>
+{% endblock %}

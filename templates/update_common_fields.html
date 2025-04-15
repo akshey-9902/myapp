@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container mt-4">
+  <h2>Enter Common Degree Details</h2>
+  <form method="POST" action="{{ url_for('update_common_fields') }}">
+    <div class="form-group">
+      <label for="completion_year">Completion Year</label>
+      <input type="text" name="completion_year" id="completion_year" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="convo_day">Convocation Day</label>
+      <input type="text" name="convo_day" id="convo_day" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="convo_month_hindi">Convocation Month (Hindi)</label>
+      <input type="text" name="convo_month_hindi" id="convo_month_hindi" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="convo_year">Convocation Year</label>
+      <input type="text" name="convo_year" id="convo_year" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="given_day">Given Day</label>
+      <input type="text" name="given_day" id="given_day" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="given_month">Given Month</label>
+      <input type="text" name="given_month" id="given_month" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="given_year">Given Year</label>
+      <input type="text" name="given_year" id="given_year" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-success mt-3">Save and Generate Degrees</button>
+  </form>
+</div>
+{% endblock %}

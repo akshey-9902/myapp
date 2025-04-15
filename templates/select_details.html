@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container mt-4">
+  <h2>Select Details</h2>
+  <form method="POST" action="{{ url_for('select_details') }}">
+    <div class="form-group">
+      <label for="session_pk">Session</label>
+      <select name="session_pk" id="session_pk" class="form-control">
+        {% for session in sessions %}
+        <option value="{{ session.pk }}">{{ session.session_name }} ({{ session.session_short_name }})</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="programme_pk">Programme</label>
+      <select name="programme_pk" id="programme_pk" class="form-control">
+        {% for programme in programmes %}
+        <option value="{{ programme.pk }}">{{ programme.programme_name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="semester_pk">Semester</label>
+      <select name="semester_pk" id="semester_pk" class="form-control">
+        {% for sem in semesters %}
+        <option value="{{ sem.pk }}">{{ sem.semester }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+  </form>
+</div>
+{% endblock %}
