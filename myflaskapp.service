@@ -1,0 +1,14 @@
+[Unit]
+Description=My Flask Application
+After=network.target
+
+[Service]
+User=baadalvm
+Group=www-data
+WorkingDirectory=/home/baadalvm/myapp
+Environment="PATH=/home/baadalvm/myapp/venv/bin"
+ExecStart=/home/baadalvm/myapp/venv/bin/gunicorn --bind 0.0.0.0:5000 -k eventlet -w 1 app:app
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
